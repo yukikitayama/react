@@ -1,11 +1,8 @@
 import { Fragment, useState } from "react";
 import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
 // import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Card from '@mui/material/Card';
 
-import NewTask from './components/NewTask';
+import NewTaskDialog from "./components/NewTaskDialog";
 // import Todos from "./components/Todos";
 // import NewTodo from "./components/NewTodo";
 // import TodosContextProvider from "./store/todos-context";
@@ -30,24 +27,17 @@ function App() {
       <Button variant="contained" onClick={handleOpen}>
         Create
       </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        {/* <Box sx={style}>
+      <NewTaskDialog open={open} onClose={handleClose} />
+      {/* <Box sx={style}>
           <Typography variant="h6" component="h2">
             Create task
           </Typography>
         </Box> */}
-        {/* <Card>
+      {/* <Card>
           <Typography variant="h6" component="h2">
             Create task
           </Typography>
         </Card> */}
-        <NewTask />
-      </Modal>
     </Fragment>
   );
 }
