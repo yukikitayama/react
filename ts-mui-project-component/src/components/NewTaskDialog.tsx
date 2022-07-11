@@ -59,14 +59,25 @@ const NewTask: React.FC<{ open: boolean; onClose: () => void }> = (props) => {
     SetLabels(typeof value === "string" ? value.split(",") : value);
   };
 
-  const submitDataHandler = () => {
+  const submitDataHandler = async () => {
     const enteredTask = taskInputRef.current?.value;
-    console.log('Project: ' + project);
-    console.log('Task: ' + enteredTask);
-    console.log(`Priority: ${priority}`);
-    console.log(`Start date: ${startDate}`);
-    console.log(`Due date: ${dueDate}`);
-    console.log(`Labels: ${labels}`);
+    const extractedStartDate = new Date(startDate!.getTime() - startDate!.getTimezoneOffset() * 60 * 1000).toISOString().split('T')[0];
+    const extractedDueDate = new Date(dueDate!.getTime() - startDate!.getTimezoneOffset() * 60 * 1000).toISOString().split('T')[0];
+    
+    const response = await fetch('https://xxx.com/xxx', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        project: project,
+        task: enteredTask,
+        priority: priority,
+        startDate: extractedStartDate,
+        dueDate: extractedDueDate,
+        labels: labels
+      })
+    })
   };
 
   return (
