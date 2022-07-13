@@ -72,7 +72,7 @@ const NewTask: React.FC<{ open: boolean; onClose: () => void }> = (props) => {
       body: JSON.stringify({
         project: project,
         task: enteredTask,
-        priority: priority,
+        priority: priority.toLowerCase(),
         startDate: extractedStartDate,
         dueDate: extractedDueDate,
         labels: labels

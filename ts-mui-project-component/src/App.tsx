@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Typography from '@mui/material/Typography';
 
 import NewTaskDialog from "./components/NewTaskDialog";
+import Board from "./components/Board";
 
 function App() {
   const [open, setOpen] = useState(false);
@@ -25,6 +26,8 @@ function App() {
         Create
       </Button>
       <NewTaskDialog open={open} onClose={handleClose} />
+
+      <Board />
     </Fragment>
   );
 }
