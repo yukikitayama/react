@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
 import Button from "@mui/material/Button";
-import Typography from '@mui/material/Typography';
+import Typography from "@mui/material/Typography";
 
 import NewTaskDialog from "./components/NewTaskDialog";
 import Board from "./components/Board";
@@ -20,6 +20,8 @@ function App() {
           <li>Create a task</li>
           <li>Render list of tasks</li>
           <li>Change status of a task</li>
+          <li>Delete a task</li>
+          <li>Archive a task</li>
         </ul>
       </div>
       <Button variant="contained" onClick={handleOpen}>

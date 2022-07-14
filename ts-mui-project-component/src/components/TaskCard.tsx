@@ -7,13 +7,13 @@ const TaskCard: React.FC<{ task: string; dueDate: string, priority: string }> = 
   return (
     <Card>
       <CardContent>
-        <Typography variant="h6" component="div">
+        <Typography variant="subtitle1" component="div">
           {props.task}
         </Typography>
-        <Typography color="text.secondary">
+        <Typography variant="body2" color="text.secondary">
           {props.dueDate}
         </Typography>
-        <Typography color="text.secondary">
+        <Typography variant="body2" color="text.secondary">
           {props.priority}
         </Typography>
       </CardContent>

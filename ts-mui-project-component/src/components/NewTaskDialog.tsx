@@ -64,7 +64,7 @@ const NewTask: React.FC<{ open: boolean; onClose: () => void }> = (props) => {
     const extractedStartDate = new Date(startDate!.getTime() - startDate!.getTimezoneOffset() * 60 * 1000).toISOString().split('T')[0];
     const extractedDueDate = new Date(dueDate!.getTime() - startDate!.getTimezoneOffset() * 60 * 1000).toISOString().split('T')[0];
     
-    const response = await fetch('https://xxx.com/xxx', {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/project`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
