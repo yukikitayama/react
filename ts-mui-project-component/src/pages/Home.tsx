@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import TaskDialog from "../components/TaskDialog";
 import Board from "../components/Board";
 import { DialogContext } from "../store/dialog-context";
+import UpdateTaskDialog from "../components/UpdateTaskDialog";
 
 const Home = () => {
   const dialogCtx = useContext(DialogContext);
@@ -26,7 +27,10 @@ const Home = () => {
       <Button variant="contained" onClick={dialogCtx.openDialog}>
         Create
       </Button>
+
       <TaskDialog />
+      
+      <UpdateTaskDialog />
 
       <Board />
     </Fragment>

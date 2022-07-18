@@ -5,26 +5,33 @@ import CardActionArea from "@mui/material/CardActionArea";
 import Typography from "@mui/material/Typography";
 
 import { DialogContext } from "../store/dialog-context";
+import Task from "../models/task";
 
 const TaskCard: React.FC<{
-  task: string;
-  dueDate: string;
-  priority: string;
+  task: Task;
 }> = (props) => {
-  const dialogCtx = useContext(DialogContext);  
+  const dialogCtx = useContext(DialogContext);
+  
+  const openUpdateDialogHandler = () => {
+    // Set a certain task
+    dialogCtx.setSelectedTask(props.task);
+
+    // Open update task dialog
+    dialogCtx.openUpdateDialog();
+  };
 
   return (
     <Card>
-      <CardActionArea onClick={dialogCtx.openDialog}>
+      <CardActionArea onClick={openUpdateDialogHandler}>
         <CardContent>
           <Typography variant="subtitle1" component="div">
-            {props.task}
+            {props.task.task}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {props.dueDate}
+            {props.task.dueDate}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {props.priority}
+            {props.task.priority}
           </Typography>
         </CardContent>
       </CardActionArea>

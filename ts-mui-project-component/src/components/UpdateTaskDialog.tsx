@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -7,16 +7,17 @@ import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import Chip from "@mui/material/Chip";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
 
+// import Task from "../models/task";
 import { DialogContext } from "../store/dialog-context";
 
 const projects: string[] = [
@@ -49,16 +50,35 @@ const statuses = [
   { label: "Done", value: "done" },
 ];
 
-const TaskDialog: React.FC = () => {
-  const [status, setStatus] = useState(statuses[0].value);
-  const [project, setProject] = useState(projects[0]);
-  const [priority, setPriority] = useState(priorities[1].value);
+// const UpdateTaskDialog: React.FC<{ task: Task; }> = (props) => {
+const UpdateTaskDialog: React.FC = () => {
+  const [status, setStatus] = useState<string>("");
+  const [project, setProject] = useState<string>("");
+  const [priority, setPriority] = useState<string>("");
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [dueDate, setDueDate] = useState<Date | null>(null);
   const [labels, setLabels] = useState<string[]>([]);
+  const [taskId, setTaskId] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
-  const taskInputRef = useRef<HTMLInputElement>(null);
+  // const taskInputRef = useRef<HTMLInputElement>(null);
+  const [taskText, setTaskText] = useState("");
   const dialogCtx = useContext(DialogContext);
+
+  useEffect(() => {
+    const selectedTask = dialogCtx.selectedTask!;
+
+    // console.log(selectedTask);
+
+    setStatus(selectedTask.status);
+    setProject(selectedTask.project);
+    setPriority(selectedTask.priority);
+    setStartDate(new Date(selectedTask.startDate));
+    setDueDate(new Date(selectedTask.dueDate));
+    // Nullish coalescing operator (??) allow me to use if null then []
+    setLabels(selectedTask.labels ?? []);
+    setTaskId(selectedTask.id);
+    setTaskText(selectedTask.task);
+  }, [dialogCtx.selectedTask]);
 
   const handleStatusChange = (event: SelectChangeEvent) => {
     setStatus(event.target.value as string);
@@ -66,6 +86,12 @@ const TaskDialog: React.FC = () => {
 
   const handleProjectChange = (event: SelectChangeEvent) => {
     setProject(event.target.value as string);
+  };
+
+  const taskTextChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setTaskText(event.target.value);
   };
 
   const handlePriorityChange = (event: SelectChangeEvent) => {
@@ -82,7 +108,7 @@ const TaskDialog: React.FC = () => {
   const submitDataHandler = async () => {
     setIsLoading(true);
 
-    const enteredTask = taskInputRef.current?.value;
+    // const enteredTask = taskInputRef.current?.value;
     const extractedStartDate = new Date(
       startDate!.getTime() - startDate!.getTimezoneOffset() * 60 * 1000
     )
@@ -95,42 +121,78 @@ const TaskDialog: React.FC = () => {
       .split("T")[0];
 
     const response = await fetch(`${process.env.REACT_APP_API_URL}/project`, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         status: status,
         project: project,
-        task: enteredTask,
-        priority: priority.toLowerCase(),
+        // task: enteredTask,
+        task: taskText,
+        priority: priority!.toLowerCase(),
         startDate: extractedStartDate,
         dueDate: extractedDueDate,
         labels: labels,
+        id: taskId
       }),
     });
 
     setIsLoading(false);
 
     if (response.ok) {
-      setStatus(statuses[0].value);
-      setProject(projects[0]);
-      setPriority(priorities[1].value);
-      setStartDate(null);
-      setDueDate(null);
-      setLabels([]);
-      dialogCtx.closeDialog();
+      dialogCtx.closeUpdateDialog();
+    }
+  };
+
+  const deleteTaskHandler = async () => {
+    setIsLoading(true);
+
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/project`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: taskId,
+      }),
+    });
+
+    setIsLoading(false);
+
+    if (response.ok) {
+      dialogCtx.closeUpdateDialog();
+    }
+  };
+
+  const archiveTaskHandler = async () => {
+    setIsLoading(true);
+
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/project`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: taskId,
+      }),
+    });
+
+    setIsLoading(false);
+
+    if (response.ok) {
+      dialogCtx.closeUpdateDialog();
     }
   };
 
   return (
     <Dialog
-      open={dialogCtx.isDialogOpen}
-      onClose={dialogCtx.closeDialog}
+      open={dialogCtx.isUpdateDialogOpen}
+      onClose={dialogCtx.closeUpdateDialog}
       fullWidth
       maxWidth="md"
     >
-      <DialogTitle>Create task</DialogTitle>
+      <DialogTitle>Update task</DialogTitle>
       <DialogContent>
         <Grid
           container
@@ -169,7 +231,9 @@ const TaskDialog: React.FC = () => {
               fullWidth
               multiline
               variant="standard"
-              inputRef={taskInputRef}
+              // inputRef={taskInputRef}
+              value={taskText}
+              onChange={taskTextChangeHandler}
             />
           </Grid>
 
@@ -236,11 +300,21 @@ const TaskDialog: React.FC = () => {
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button variant="text" onClick={dialogCtx.closeDialog}>
+        <Button variant="contained" color="error" onClick={deleteTaskHandler}>
+          Delete
+        </Button>
+        <Button
+          variant="contained"
+          color="warning"
+          onClick={archiveTaskHandler}
+        >
+          Archive
+        </Button>
+        <Button variant="text" onClick={dialogCtx.closeUpdateDialog}>
           Cancel
         </Button>
         <Button variant="contained" onClick={submitDataHandler}>
-          Create
+          Update
         </Button>
       </DialogActions>
       {isLoading && <LinearProgress />}
@@ -248,4 +322,4 @@ const TaskDialog: React.FC = () => {
   );
 };
 
-export default TaskDialog;
+export default UpdateTaskDialog;

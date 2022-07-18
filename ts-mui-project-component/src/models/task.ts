@@ -10,14 +10,14 @@ class Task {
     public labels: string[],
     public status: string
   ) {
-    this.id = id;
-    this.project = project;
-    this.task = task;
-    this.priority = priority;
-    this.startDate = startDate;
-    this.dueDate = dueDate;
-    this.labels = labels;
-    this.status = status;
+    // this.id = id;
+    // this.project = project;
+    // this.task = task;
+    // this.priority = priority;
+    // this.startDate = startDate;
+    // this.dueDate = dueDate;
+    // this.labels = labels;
+    // this.status = status;
   }
 }
 
