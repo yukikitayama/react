@@ -33,3 +33,13 @@ React hooks must be executed inside react component functions.
 **Lifting the state up**
 
 `props.children`. `children` is a reserved props. If you wrap component with another custom components, by default, React doesn't know where to put that wrapped content inside the wrapping component.
+
+`<button type="button"></button>` doesn't submit `<form>`, but `<button></button>` will submit.
+
+`<form onSubmit={function}>` default form submission, and browser automatically submits HTTP requests. Use `event.preventDefault()`.
+
+React **state**. If you update state and if the new state is based on previous state, **you should pass a function to state update function of `useState()`**. Use arrow function like `setStateFunction((prevState) => [newData, ...prevState])` for example.
+
+For loop to output multiple React components requires to assign `key` props in that component.
+
+To use `dummy-backend`, `npm install` and `npm start`, then `localhost:8080`
