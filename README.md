@@ -52,3 +52,14 @@ React Router
 
 **Layout route**
 
+## TypeScript
+
+`npx create-react-app my-app --template typescript`
+
+Form
+
+`event: React.FormEvent`
+
+`<input>`, `useRef<HTMLInputElement>()`.
+
+To pass an argument to props function, `props.function-name.bind(null, arg)`.
