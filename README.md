@@ -43,3 +43,12 @@ React **state**. If you update state and if the new state is based on previous s
 For loop to output multiple React components requires to assign `key` props in that component.
 
 To use `dummy-backend`, `npm install` and `npm start`, then `localhost:8080`
+
+`useEffect(function, array)` is for side effect, not returning JSX, but we wanna bring some effects. It should not accept async function as the function argument, but the function can contain async function and execute it. But the function should not return `Promise`.
+
+React Router
+
+`npm install react-router-dom`
+
+**Layout route**
+
