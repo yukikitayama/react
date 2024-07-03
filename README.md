@@ -1,5 +1,7 @@
 # React
 
+- [Udemy React & TypeScript - The Practical Guide](https://www.udemy.com/course/react-typescript-the-practical-guide/)
+
 Section 2: Optional: React Refresher in Udemy Next.js 14 & React - The Complete Guide
 
 `npm run dev` with the project created by **vite**.
@@ -52,7 +54,22 @@ React Router
 
 **Layout route**
 
+## Dashboard
+
+- https://mui.com/material-ui/getting-started/templates/dashboard/
+- https://github.com/mui/material-ui/tree/v5.15.21/docs/data/material/getting-started/templates/dashboard
+
 ## TypeScript
+
+TypeScript builds up on JavaScript and extends its syntax by adding **strong typing**.
+TypeScript helps you **catch and fix type-related errors earlier**.
+Sometimes, that comes at the cost of having to define **complex value types**.
+
+To make React app more type safe.
+
+`npm install -g typescript` installs globally.
+
+`npx tsc` compiles TypeScript files to JavaScript files.
 
 `npx create-react-app my-app --template typescript`
 
