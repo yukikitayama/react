@@ -59,6 +59,11 @@ React Router
 - https://mui.com/material-ui/getting-started/templates/dashboard/
 - https://github.com/mui/material-ui/tree/v5.15.21/docs/data/material/getting-started/templates/dashboard
 
+## MUI
+
+- `shouldForwardProp`
+  - https://stackoverflow.com/questions/74750742/mui-styled-component-shouldforwardprop
+
 ## TypeScript
 
 TypeScript builds up on JavaScript and extends its syntax by adding **strong typing**.
