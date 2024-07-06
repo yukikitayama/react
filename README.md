@@ -63,6 +63,8 @@ React Router
 
 - `shouldForwardProp`
   - https://stackoverflow.com/questions/74750742/mui-styled-component-shouldforwardprop
+- MUI `ListItemButton` with `react-router-dom`
+  - https://stackoverflow.com/questions/71822728/how-to-enable-listitembutton-to-use-react-router-v6-link
 
 ## TypeScript
 

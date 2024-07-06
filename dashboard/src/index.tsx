@@ -1,20 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import Dashboard from './routes/Dashboard';
+import Piano from './routes/Piano';
+import Tennis from './routes/Tennis';
+import RootLayout from './routes/RootLayout';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+
+const router = createBrowserRouter([
+  { path: '/', element: <RootLayout />, children: [
+    { path: '/', element: <Dashboard /> },
+    { path: '/dashboard', element: <Dashboard /> },
+    { path: '/piano', element: <Piano /> },
+    { path: '/tennis', element: <Tennis /> }  
+  ] },
+]);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

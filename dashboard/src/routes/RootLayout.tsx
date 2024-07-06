@@ -1,25 +1,19 @@
-// import React from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-
 import { useState } from 'react';
-
+import { Outlet } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Navigation from './components/Navigation';
-import Menu from './components/Menu';
-import Content from './components/Content';
+import Navigation from '../components/Navigation';
+import Menu from '../components/Menu';
 
 const defaultTheme = createTheme();
 
-function App() {
+const RootLayout = () => {
   const [open, setOpen] = useState(true);
 
   const toggleDrawer = () => {
     setOpen(!open);
   };
-
+  
   return (
     <ThemeProvider theme={defaultTheme}>
       {/* This display: flex can place navigation, menu and content nicely */}
@@ -27,10 +21,10 @@ function App() {
         {/* <CssBaseline /> */}
         <Navigation open={open} toggleDrawer={toggleDrawer} />
         <Menu open={open} toggleDrawer={toggleDrawer} />
-        <Content />
+        <Outlet />
       </Box>
     </ThemeProvider>
   );
-}
+};
 
-export default App;
+export default RootLayout;

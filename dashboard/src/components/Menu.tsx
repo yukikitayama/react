@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
@@ -23,19 +24,19 @@ interface MenuProps {
 
 const listItems = (
   <React.Fragment>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/dashboard" >
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/piano">
       <ListItemIcon>
         <PianoIcon />
       </ListItemIcon>
       <ListItemText primary="Piano" />
     </ListItemButton>
-    <ListItemButton>
+    <ListItemButton component={Link} to="/tennis">
       <ListItemIcon>
         <SportsTennisIcon />
       </ListItemIcon>
