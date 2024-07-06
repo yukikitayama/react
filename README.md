@@ -87,3 +87,9 @@ Form
 `<input>`, `useRef<HTMLInputElement>()`.
 
 To pass an argument to props function, `props.function-name.bind(null, arg)`.
+
+ts.config.json
+
+`tsconfig.json` is configuration for TypeScript compiler. Based of this configuration VS code shows us errors.
+ 
+ `"strict": true` sets that you always must explicitly set the tyoe of parameters in a function, for example.
