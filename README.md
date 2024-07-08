@@ -66,6 +66,10 @@ React Router
 - MUI `ListItemButton` with `react-router-dom`
   - https://stackoverflow.com/questions/71822728/how-to-enable-listitembutton-to-use-react-router-v6-link
 
+## Form
+
+`event.currentTarget.reset();` will remove all the inputs. This will be useful when a form submission handler is called.
+
 ## TypeScript
 
 TypeScript builds up on JavaScript and extends its syntax by adding **strong typing**.
@@ -92,4 +96,28 @@ ts.config.json
 
 `tsconfig.json` is configuration for TypeScript compiler. Based of this configuration VS code shows us errors.
  
- `"strict": true` sets that you always must explicitly set the tyoe of parameters in a function, for example.
+`"strict": true` sets that you always must explicitly set the tyoe of parameters in a function, for example.
+
+`props` that is automatically passed to every component by React is an **object** which we can define by key-value pairs. Using custom type `type` or interface `interface` to define a props type is your choice.
+
+Every `props` has `children` property in every React component. `ReactNode` type is the type of `children` prop. `import { type ReactNode } from 'react';`
+
+Alternative way is `import { type PropsWithChildren } from 'react';` and `type PropsName = PropsWithChildren<{ additionalProp: type }>;`. Either way, children type is `ReactNode`.
+
+`key` prop (used by React to track specific component instances) can be set on custom components **even if you didn't specify it in your props type**.
+
+Types for `useState()` uses a **generic type**, so use a syntax like `const [goals, setGoals] = useState<string[]>([]);`
+
+To share types across component, you can export type like `export type TypeName = {...};` and import it by `import { type TypeName } from '...';`.
+
+Type for form `event` object is `event: FormEvent<HTMLFormElement>` or `event: FormEvent` by `import { type FormEvent } from 'react';`
+
+If you define a in-line form event handler with arrow function as value of `onSubmit={() => ...}`, no need to specify type for event, but it's hard to read the code, because TypeScript can infer.
+
+**Error message of TypeScript typically contains the most helpful message in the most nested inner message, and you can ignore the outer messages**
+
+`useRef();` will throw `undefined` error, so typically `useRef(null);` initialiation can help.
+
+`HTMLInputElement` in `useRef<HTMLInputElement>(null);` is a built-in type in TypeScript, so you don't need to import.
+
+`variable!.` allows developer to tell TypeScript that, at the time of accessing `variable`, developers know that it's not null, so it's okay to access its property.
