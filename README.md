@@ -54,6 +54,8 @@ React Router
 
 **Layout route**
 
+`import { ComponentPropsWithoutRef } from 'react';`, `ComponentPropsWithoutRef<'input'>` gives us **an object that contains all the default props of the standard built-in input element**.
+
 ## Dashboard
 
 - https://mui.com/material-ui/getting-started/templates/dashboard/
@@ -69,6 +71,14 @@ React Router
 ## Form
 
 `event.currentTarget.reset();` will remove all the inputs. This will be useful when a form submission handler is called.
+
+## VS code
+
+`Ctrl + Space` to pop up auto completion menu.
+
+## JavaScript
+
+`{label, id, ...props}` to collect all the remaining properties of the object and store them in a new props object. `<input id={id} {...props} />` to spread all these properties as key-value pairs onto the input element.
 
 ## TypeScript
 
@@ -121,3 +131,16 @@ If you define a in-line form event handler with arrow function as value of `onSu
 `HTMLInputElement` in `useRef<HTMLInputElement>(null);` is a built-in type in TypeScript, so you don't need to import.
 
 `variable!.` allows developer to tell TypeScript that, at the time of accessing `variable`, developers know that it's not null, so it's okay to access its property.
+
+Optional property for custom type can be defined by `property-name?: type`. If we don't set the property, it will be `undefined`.
+
+```
+type InfoBoxProps = {
+  mode: 'hint' | 'warning';
+  severity?: 'low' | 'medium' | 'high';
+};
+```
+
+**Discriminated union** is to make and use a Union type of custom types, and use `if` statements to check the types to select properties in the custom type.
+
+**Wrapper component** is to wrap built-in elements to enhance functionality and styles.
