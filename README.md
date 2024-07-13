@@ -144,3 +144,7 @@ type InfoBoxProps = {
 **Discriminated union** is to make and use a Union type of custom types, and use `if` statements to check the types to select properties in the custom type.
 
 **Wrapper component** is to wrap built-in elements to enhance functionality and styles.
+
+**Type predicate**, `function name(props: SomeProps | OtherProps): props is SomeProps { return boolean }`
+
+**Polymorphic component** means a wrapper component where we don't know in advance which component it will wrap. It should be able to wrap all kinds of components. `import { type ElementType } from 'react';` for **identifier** of JSX components. 
