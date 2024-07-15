@@ -56,6 +56,9 @@ React Router
 
 `import { ComponentPropsWithoutRef } from 'react';`, `ComponentPropsWithoutRef<'input'>` gives us **an object that contains all the default props of the standard built-in input element**.
 
+`forwardRef` is a function which takes a component function as value. 
+`forwardRef<type of ref, type of props>(function component)`
+
 ## Dashboard
 
 - https://mui.com/material-ui/getting-started/templates/dashboard/
@@ -147,4 +150,5 @@ type InfoBoxProps = {
 
 **Type predicate**, `function name(props: SomeProps | OtherProps): props is SomeProps { return boolean }`
 
-**Polymorphic component** means a wrapper component where we don't know in advance which component it will wrap. It should be able to wrap all kinds of components. `import { type ElementType } from 'react';` for **identifier** of JSX components. 
+**Polymorphic component** means a wrapper component where we don't know in advance which component it will wrap. It should be able to wrap all kinds of components. `import { type ElementType } from 'react';` for **identifier** of JSX components. `ElementType` is name of component. `ReactNode` is JSX component itself.
+
