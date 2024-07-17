@@ -75,6 +75,8 @@ React Router
 
 `event.currentTarget.reset();` will remove all the inputs. This will be useful when a form submission handler is called.
 
+`const formData = new FormData(event.currentTarget);` is a built-in method to gather all the input data in `<form>`. All the input must set `name=""` in `<input>`. `const data = Object.fromEntries(formData);` allows to have an object to easier to extract data.
+
 ## VS code
 
 `Ctrl + Space` to pop up auto completion menu.

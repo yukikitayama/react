@@ -3,9 +3,17 @@ import { useRef } from "react";
 import Input from "./components/Input.tsx";
 import Button from "./components/Button.tsx";
 import Container from "./components/Container.tsx";
+import Form, { type FormHandle } from "./components/Form.tsx";
 
 function App() {
-  const input = useRef<HTMLInputElement>(null);
+  const customForm = useRef<FormHandle>(null);
+  // const input = useRef<HTMLInputElement>(null);
+
+  function handleSave(data: unknown) {
+    const extractedData = data as { name: string; age: string };
+    console.log(extractedData);
+    customForm.current?.clear();
+  }
 
   return (
     <main>
@@ -18,7 +26,14 @@ function App() {
       <Button href="https://google.com">A Link</Button>
     </p> */}
       {/* <Container as={Button}>Click me</Container> */}
-      <Input label="Test" id="test" ref={input} />
+      {/* <Input label="Test" id="test" ref={input} /> */}
+      <Form onSave={handleSave} ref={customForm}>
+        <Input type="text" label="Name" id="name" />
+        <Input type="number" label="Age" id="age" />
+        <p>
+          <Button>Save</Button>
+        </p>
+      </Form>
     </main>
   );
 }
