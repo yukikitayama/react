@@ -162,3 +162,20 @@ type InfoBoxProps = {
 
 **Polymorphic component** means a wrapper component where we don't know in advance which component it will wrap. It should be able to wrap all kinds of components. `import { type ElementType } from 'react';` for **identifier** of JSX components. `ElementType` is name of component. `ReactNode` is JSX component itself.
 
+## Redux
+
+**Redux** is for state management
+- Have a single central Redux store that stores and manages the entire shared state.
+- Components dispatch actions
+- Actions trigger reducer functions
+- Reducers update the state in store.
+- Components can select (read) data from the store.
+
+`npm install @reduxjs/toolkit` is recommended way to use redux
+
+`npm install react-redux` to connect redux to react.
+
+Create `store/` folder in `src/` folder, and create `store.ts` in `store` folder.
+
+Add `xxx-slice.ts` in `store` folder for states for each concept
+
