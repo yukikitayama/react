@@ -162,6 +162,13 @@ type InfoBoxProps = {
 
 **Polymorphic component** means a wrapper component where we don't know in advance which component it will wrap. It should be able to wrap all kinds of components. `import { type ElementType } from 'react';` for **identifier** of JSX components. `ElementType` is name of component. `ReactNode` is JSX component itself.
 
+`array.splice(index, number)` creates a new array by removing `number` numbers of items from `index` in the original array. 
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+
+`typeof` is convenient to extract type from variable and create a custom type. e.g. `export type AppDispatch = typeof store.dispatch;`
+
+`ReturnType<generic-type>` gives us a type of returned value of a function type. e.g. `export type RootState = ReturnType<typeof store.getState>;`
+
 ## Redux
 
 **Redux** is for state management
@@ -178,4 +185,9 @@ type InfoBoxProps = {
 Create `store/` folder in `src/` folder, and create `store.ts` in `store` folder.
 
 Add `xxx-slice.ts` in `store` folder for states for each concept
+
+Implementation key points
+- Create `xxx-slice.ts` for initial state and action for each state
+- Create `store.ts` to configure store and create types of state and dispatch
+- Create `hooks.ts` to define state and dispatch functions with types 
 
