@@ -77,6 +77,33 @@ React Router
 
 `const formData = new FormData(event.currentTarget);` is a built-in method to gather all the input data in `<form>`. All the input must set `name=""` in `<input>`. `const data = Object.fromEntries(formData);` allows to have an object to easier to extract data.
 
+- Form submission
+- Input validation
+
+2 ways to submit form
+- Default `type` of `<button>` is `type="submit"` which triggers HTTP requests from `<form>`. 
+If we use `<button type="button">` prevents HTTP requests and page won't be reloaded.
+- (Better) Another more elegant way is to keep the `<button type="submit".` (`type="submit"` is default, so you don't even have to specify it), and use `<form onSubmit={submitHandler}>` (Not connecting form submission handler to button element). 
+
+If we use `useState()`, create input change handler functions and connect them to `<input onChange={handler} value={state}>`, and `handler(event)` and `event.target.value` contains the value in `<input>`.
+
+3 ways to handle values in form
+- `useState` with `value` prop and `onChange` prop
+- `useRef` with `ref` prop and use `current.value` like `refVariable.current.value`
+  - Advantage of using `ref` is less code than using `state`.
+  - Disadvantage is you need to be careful and avoid changing the value of the ref by assigning value directory like `refVariable.current.value = 'something'`.
+- `const formData = new FormData(event.target);` in form submission handler with `event`, and all input fields or select fields must have `name` prop, and `const data = Object.fromEntries(formData.entries());` to create object.
+  - `formData.get("name1")` can get a value of an input field with `name="name1"`.
+  - Use `formData.getAll("name2")` if `name2` is multi-selection field. Each input field of multi-selection needs to have the same name.
+  - Advantage is, it's better with a complex form.
+
+2 way of clearing form
+- Use `type="reset"` in `<button>` element. Built-in function of JavaScript.
+- Use `event.target.reset()` in form submission handler with `<form>`.
+
+Third-party form libraries.
+Google search `react form libraries`.
+
 ## Data fetching
 
 ```
@@ -92,6 +119,8 @@ return data;
 ## JavaScript
 
 `{label, id, ...props}` to collect all the remaining properties of the object and store them in a new props object. `<input id={id} {...props} />` to spread all these properties as key-value pairs onto the input element.
+
+`{[variable_containing_key]: value}` dynamically sets key and value in object with variables.
 
 ## TypeScript
 
